@@ -3,7 +3,7 @@ title: "rembgで背景除去アプリを作ってHugging Face Spacesに無料公
 emoji: "🪄"
 type: "tech"
 topics: ["python", "gradio", "huggingface", "機械学習", "画像処理"]
-published: false
+published: true
 ---
 
 ## この記事でやること
