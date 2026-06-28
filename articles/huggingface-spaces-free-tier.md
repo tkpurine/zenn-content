@@ -3,7 +3,7 @@ title: "生成AIに「Hugging Face Spacesの無料枠」を聞いてみた"
 emoji: "🤗"
 type: "tech"
 topics: ["ai", "huggingface", "機械学習", "gradio", "個人開発"]
-published: false
+published: true
 ---
 
 ## はじめに
