@@ -3,7 +3,7 @@ title: "生成AIに「SAM（Segment Anything）」を聞いてみた（クリッ
 emoji: "🎯"
 type: "tech"
 topics: ["ai", "画像処理", "機械学習", "rembg", "python"]
-published: false
+published: true
 ---
 
 ## はじめに
