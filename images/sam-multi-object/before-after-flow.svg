@@ -1,0 +1,50 @@
+<svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="960" height="400" fill="#ffffff"/>
+  <defs>
+    <marker id="fa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .hd{fill:#1a1a1a;font-size:14px;font-weight:700;text-anchor:middle}
+      .nl{fill:#1a1a1a;font-size:11.5px;font-weight:700;text-anchor:middle}
+      .box{fill:#f4f4f5;stroke:#c4c4cc;stroke-width:1.4}
+      .acc{fill:#e8edff;stroke:#4f7cff;stroke-width:1.8}
+      .flow{stroke:#8a8a8a;stroke-width:1.7;fill:none;marker-end:url(#fa)}
+      .bad{fill:#c0392b;font-size:11px;font-weight:700;text-anchor:middle}
+      .good{fill:#1e8a4c;font-size:11px;font-weight:700;text-anchor:middle}
+      .sm{fill:#555;font-size:10px;text-anchor:middle}
+      .div{stroke:#e2e2e6;stroke-width:1}
+    </style>
+  </defs>
+
+  <line class="div" x1="470" y1="46" x2="470" y2="370"/>
+
+  <text class="hd" x="235" y="30">旧デモ：単一選択</text>
+  <rect class="box" x="150" y="50" width="170" height="32" rx="6"/><text class="nl" x="235" y="70">画像アップ</text>
+  <path class="flow" d="M235,82 L235,96"/>
+  <rect class="box" x="150" y="98" width="170" height="32" rx="6"/><text class="nl" x="235" y="118">点をクリック</text>
+  <path class="flow" d="M235,130 L235,144"/>
+  <rect class="acc" x="150" y="146" width="170" height="32" rx="6"/><text class="nl" x="235" y="166">SAM 実行（1回）</text>
+  <path class="flow" d="M235,178 L235,192"/>
+  <rect class="box" x="150" y="194" width="170" height="32" rx="6"/><text class="nl" x="235" y="214">1マスク表示</text>
+  <rect x="120" y="250" width="230" height="76" rx="8" fill="#f4f4f5" stroke="#c0392b" stroke-width="1.5"/>
+  <text class="sm" x="235" y="272">別の物体の点を足すと</text>
+  <text class="sm" x="235" y="288">1枚のマスクに混ざり破綻</text>
+  <text class="bad" x="235" y="310">→ 複数物体は取れなかった</text>
+
+  <text class="hd" x="720" y="30">新デモ：複数物体（union）</text>
+  <rect class="box" x="620" y="50" width="200" height="32" rx="6"/><text class="nl" x="720" y="70">画像アップ</text>
+  <path class="flow" d="M720,82 L720,96"/>
+  <rect class="box" x="620" y="98" width="200" height="32" rx="6"/><text class="nl" x="720" y="118">対象に点（複数OK）</text>
+  <path class="flow" d="M720,130 L720,144"/>
+  <rect class="acc" x="620" y="146" width="200" height="32" rx="6"/><text class="nl" x="720" y="166">Add object</text>
+  <path class="flow" d="M720,178 L720,192"/>
+  <rect class="acc" x="620" y="194" width="200" height="32" rx="6"/><text class="nl" x="720" y="214">SAM → 結果に union 合成</text>
+  <path class="flow" d="M820,210 C880,196 880,124 822,114"/>
+  <text class="sm" x="892" y="165">次の</text>
+  <text class="sm" x="892" y="178">対象へ</text>
+  <path class="flow" d="M720,226 L720,250"/>
+  <rect class="acc" x="620" y="252" width="200" height="32" rx="6"/><text class="nl" x="720" y="272">複数物体を合成</text>
+  <text class="good" x="720" y="308">複数物体を1体ずつ合成できる</text>
+  <text class="sm" x="720" y="326">確定点は青で残る／Reset allで最初から</text>
+</svg>
