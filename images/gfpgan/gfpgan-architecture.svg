@@ -1,0 +1,87 @@
+<svg viewBox="0 0 980 500" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="500" fill="#ffffff"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:19px;font-weight:700}
+      .nl{fill:#1a1a1a;font-size:13px;font-weight:700;text-anchor:middle}
+      .sub{fill:#555;font-size:11px;text-anchor:middle}
+      .box{fill:#f4f4f5;stroke:#c4c4cc;stroke-width:1.5}
+      .prior{fill:#e8edff;stroke:#4f7cff;stroke-width:2}
+      .csft{fill:#fff2e0;stroke:#e08a1e;stroke-width:2}
+      .flow{stroke:#8a8a8a;stroke-width:2;fill:none;marker-end:url(#ar)}
+      .lossbox{fill:#f7f7f9;stroke:#d7d7dd;stroke-width:1.2}
+      .ll{fill:#333;font-size:11px;text-anchor:middle}
+      .lh{fill:#c0392b;font-size:12px;font-weight:700;text-anchor:middle}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="38">GFPGAN の構造：劣化除去 U-Net ＋ StyleGAN2 顔prior を CS-SFT でつなぐ</text>
+
+  <!-- input -->
+  <rect class="box" x="30" y="90" width="120" height="88" rx="8"/>
+  <text class="nl" x="90" y="128">劣化した顔</text>
+  <text class="sub" x="90" y="148">小さい/ボケ/圧縮</text>
+
+  <path class="flow" d="M150,134 L182,134"/>
+
+  <!-- U-Net -->
+  <rect class="box" x="184" y="80" width="176" height="108" rx="8"/>
+  <text class="nl" x="272" y="112">劣化除去 U-Net</text>
+  <text class="sub" x="272" y="134">（エンコーダ）</text>
+  <text class="sub" x="272" y="152">残った情報を抽出し</text>
+  <text class="sub" x="272" y="168">潜在コード＋多scale特徴</text>
+
+  <!-- to CS-SFT (features) -->
+  <path class="flow" d="M360,150 L392,150"/>
+  <text class="sub" x="376" y="140">特徴</text>
+  <!-- to StyleGAN latent (top) -->
+  <path class="flow" d="M300,80 C300,52 640,52 660,74"/>
+  <text class="sub" x="480" y="46">潜在コード（w）</text>
+
+  <!-- CS-SFT -->
+  <rect class="csft" x="394" y="104" width="150" height="92" rx="8"/>
+  <text class="nl" x="469" y="136">CS-SFT 層</text>
+  <text class="sub" x="469" y="156">入力特徴で prior を</text>
+  <text class="sub" x="469" y="172">空間的に変調</text>
+
+  <path class="flow" d="M544,150 L576,150"/>
+
+  <!-- StyleGAN2 prior -->
+  <rect class="prior" x="578" y="80" width="180" height="116" rx="8"/>
+  <text class="nl" x="668" y="112">StyleGAN2</text>
+  <text class="nl" x="668" y="132">（顔prior・学習済）</text>
+  <text class="sub" x="668" y="154">FFHQで学習した</text>
+  <text class="sub" x="668" y="170">「本物の顔」の知識</text>
+  <text class="sub" x="668" y="186">→ きれいな顔を生成</text>
+
+  <path class="flow" d="M758,138 L790,138"/>
+
+  <!-- output -->
+  <rect class="box" x="792" y="94" width="120" height="88" rx="8"/>
+  <text class="nl" x="852" y="132">復元した顔</text>
+  <text class="sub" x="852" y="152">目/歯/肌を再構成</text>
+
+  <!-- balance note -->
+  <text class="sub" x="469" y="214" style="fill:#e08a1e;font-weight:700">忠実さ ↔ リアルさ を両立</text>
+
+  <!-- losses -->
+  <text class="lh" x="490" y="272">学習時の損失（合成劣化ペアで自己教師的に学習）</text>
+  <rect class="lossbox" x="30" y="288" width="172" height="58" rx="7"/>
+  <text class="ll" x="116" y="312">画素 L1</text>
+  <text class="ll" x="116" y="330">・知覚(VGG)</text>
+  <rect class="lossbox" x="216" y="288" width="172" height="58" rx="7"/>
+  <text class="ll" x="302" y="312">敵対的(GAN)</text>
+  <text class="ll" x="302" y="330">全体のリアルさ</text>
+  <rect class="lossbox" x="402" y="288" width="188" height="58" rx="7"/>
+  <text class="ll" x="496" y="312">顔部品の局所識別器</text>
+  <text class="ll" x="496" y="330">目・口をシャープに</text>
+  <rect class="lossbox" x="604" y="288" width="188" height="58" rx="7"/>
+  <text class="ll" x="698" y="312">同一性(ArcFace)</text>
+  <text class="ll" x="698" y="330">本人性を保つ</text>
+
+  <text class="sub" x="30" y="384" style="text-anchor:start">※ StyleGAN2 prior は事前学習済みを利用し、エンコーダ＋CS-SFT を学習（prior は微調整も）。手動アノテーション不要。</text>
+  <text class="sub" x="30" y="404" style="text-anchor:start">※ なぜ CS-SFT か：潜在コードだけだと本人性が飛び、特徴を直に使うとリアルさが薄れる。空間変調で両者のいいとこ取りを1回の推論で。</text>
+</svg>

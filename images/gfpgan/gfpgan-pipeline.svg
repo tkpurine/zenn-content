@@ -1,0 +1,96 @@
+<svg viewBox="0 0 1000 430" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="1000" height="430" fill="#ffffff"/>
+  <defs>
+    <marker id="ap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:19px;font-weight:700}
+      .st{fill:#1a1a1a;font-size:13px;font-weight:700;text-anchor:middle}
+      .sub{fill:#555;font-size:11px;text-anchor:middle}
+      .card{fill:#fafafa;stroke:#c4c4cc;stroke-width:1.4}
+      .accent{fill:#e8edff;stroke:#4f7cff;stroke-width:1.8}
+      .flow{stroke:#8a8a8a;stroke-width:2;fill:none;marker-end:url(#ap)}
+      .skin{fill:#e8c9a8}
+      .skin2{fill:#f0d9bf}
+      .hair{fill:#9a9a9a}
+      .feat{fill:#5a4636}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="36">GFPGANのパイプライン：検出 → FFHQ整列 → 復元 → 逆変換で貼り戻し</text>
+
+  <!-- 1. full photo, small face -->
+  <rect class="card" x="24" y="70" width="150" height="150" rx="8"/>
+  <rect x="34" y="80" width="130" height="130" fill="#dfeaf0"/>
+  <circle cx="99" cy="140" r="26" class="skin"/>
+  <rect x="80" y="120" width="38" height="16" class="hair"/>
+  <circle cx="90" cy="140" r="2.5" class="feat"/><circle cx="108" cy="140" r="2.5" class="feat"/>
+  <path d="M91,152 Q99,157 107,152" stroke="#5a4636" stroke-width="1.6" fill="none"/>
+  <text class="st" x="99" y="238">元の写真</text>
+  <text class="sub" x="99" y="256">顔は小さい</text>
+
+  <path class="flow" d="M176,145 L206,145"/>
+  <text class="sub" x="191" y="135">検出</text>
+
+  <!-- 2. detect + landmarks -->
+  <rect class="card" x="208" y="70" width="150" height="150" rx="8"/>
+  <rect x="255" y="95" width="60" height="72" fill="none" stroke="#c0392b" stroke-width="1.8"/>
+  <circle cx="270" cy="120" r="2.6" fill="#c0392b"/><circle cx="300" cy="120" r="2.6" fill="#c0392b"/>
+  <circle cx="285" cy="134" r="2.6" fill="#c0392b"/>
+  <circle cx="272" cy="150" r="2.6" fill="#c0392b"/><circle cx="298" cy="150" r="2.6" fill="#c0392b"/>
+  <text class="st" x="283" y="238">顔検出＋5点</text>
+  <text class="sub" x="283" y="256">両目・鼻・口角</text>
+
+  <path class="flow" d="M360,145 L390,145"/>
+  <text class="sub" x="375" y="135">整列</text>
+
+  <!-- 3. aligned 512 (tilted crop with gray corners) -->
+  <rect class="accent" x="392" y="70" width="150" height="150" rx="8"/>
+  <!-- gray padding corners implied by rotated face square -->
+  <rect x="400" y="78" width="134" height="134" fill="#c9c9c9"/>
+  <g transform="rotate(-11 467 145)">
+    <rect x="417" y="95" width="100" height="100" fill="#f0d9bf"/>
+    <circle cx="467" cy="140" r="30" class="skin2"/>
+    <rect x="443" y="116" width="48" height="16" class="hair"/>
+    <circle cx="456" cy="140" r="3" class="feat"/><circle cx="478" cy="140" r="3" class="feat"/>
+    <path d="M457,154 Q467,160 477,154" stroke="#5a4636" stroke-width="1.8" fill="none"/>
+  </g>
+  <text class="st" x="467" y="238">整列した顔 512px</text>
+  <text class="sub" x="467" y="256">FFHQ標準ポーズへ回転</text>
+
+  <path class="flow" d="M544,145 L574,145"/>
+  <text class="sub" x="559" y="135">復元</text>
+
+  <!-- 4. restored aligned -->
+  <rect class="accent" x="576" y="70" width="150" height="150" rx="8"/>
+  <rect x="584" y="78" width="134" height="134" fill="#c9c9c9"/>
+  <g transform="rotate(-11 651 145)">
+    <rect x="601" y="95" width="100" height="100" fill="#f4e2cc"/>
+    <circle cx="651" cy="140" r="30" fill="#f2d8b8"/>
+    <rect x="627" y="115" width="48" height="17" fill="#8f8f8f"/>
+    <circle cx="640" cy="140" r="3.2" fill="#3a2c20"/><circle cx="662" cy="140" r="3.2" fill="#3a2c20"/>
+    <path d="M641,154 Q651,161 661,154" stroke="#3a2c20" stroke-width="2" fill="none"/>
+  </g>
+  <text class="st" x="651" y="238">GFPGANで復元</text>
+  <text class="sub" x="651" y="256">目/肌/歯が鮮明</text>
+
+  <path class="flow" d="M728,145 L758,145"/>
+  <text class="sub" x="743" y="130">逆変換で</text>
+  <text class="sub" x="743" y="135" dy="8">貼り戻し</text>
+
+  <!-- 5. full photo restored -->
+  <rect class="card" x="760" y="70" width="150" height="150" rx="8"/>
+  <rect x="770" y="80" width="130" height="130" fill="#dfeaf0"/>
+  <circle cx="835" cy="140" r="26" fill="#f2d8b8"/>
+  <rect x="816" y="120" width="38" height="16" fill="#8f8f8f"/>
+  <circle cx="826" cy="140" r="2.6" fill="#3a2c20"/><circle cx="844" cy="140" r="2.6" fill="#3a2c20"/>
+  <path d="M827,152 Q835,158 843,152" stroke="#3a2c20" stroke-width="1.8" fill="none"/>
+  <text class="st" x="835" y="238">全体に貼り戻し</text>
+  <text class="sub" x="835" y="256">顔だけ復元</text>
+
+  <!-- notes -->
+  <text class="sub" x="30" y="322" style="text-anchor:start;fill:#e08a1e;font-weight:700">なぜ一度"傾けて"揃える？ → StyleGAN2 prior は FFHQ（アライメント済みの顔）で学習されているため、入力も同じ基準に揃える必要がある。</text>
+  <text class="sub" x="30" y="348" style="text-anchor:start">デモで見える「傾いたクロップ」＝整列直後の姿。「四隅のグレー」＝512pxの枠が元の小さい画像の外まで及んだ部分のパディング（画像外＝埋め）。</text>
+  <text class="sub" x="30" y="374" style="text-anchor:start">最後に逆アフィン変換で元の位置・角度に戻して合成するので、全体画像では顔だけが自然に差し替わる。</text>
+</svg>
