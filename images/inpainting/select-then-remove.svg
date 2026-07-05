@@ -1,0 +1,64 @@
+<svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="380" fill="#ffffff"/>
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:19px;font-weight:700}
+      .st{fill:#1a1a1a;font-size:14px;font-weight:700;text-anchor:middle}
+      .sub{fill:#555;font-size:11px;text-anchor:middle}
+      .card{fill:#fafafa;stroke:#c4c4cc;stroke-width:1.4}
+      .flow{stroke:#8a8a8a;stroke-width:2;fill:none;marker-end:url(#a2)}
+      .maskacc{fill:#eef7f0;stroke:#3fae6a;stroke-width:1.8}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="38">「選ぶ → 消す」：マスクさえ作れば、手描きでも SAM でもいい</text>
+
+  <!-- 1 input -->
+  <rect class="card" x="30" y="80" width="180" height="150" rx="8"/>
+  <rect x="40" y="90" width="160" height="130" fill="#dce9d6"/>
+  <rect x="60" y="120" width="46" height="90" fill="#7fae6a"/>
+  <circle cx="83" cy="108" r="15" fill="#e8c9a8"/>
+  <text class="sub" x="120" y="200" fill="#3a5a2a">消したい人物</text>
+  <text class="st" x="120" y="252">元画像</text>
+
+  <path class="flow" d="M212,155 L250,155"/>
+  <text class="sub" x="231" y="145">選ぶ</text>
+
+  <!-- 2 mask (two ways) -->
+  <rect class="maskacc" x="252" y="70" width="220" height="170" rx="8"/>
+  <text class="st" x="362" y="94" fill="#2f7d4e">マスクを作る</text>
+  <!-- brush way -->
+  <rect x="270" y="108" width="86" height="76" fill="#111"/>
+  <rect x="286" y="126" width="40" height="52" fill="#ff2d2d"/>
+  <text class="sub" x="313" y="200">手描きブラシ</text>
+  <!-- sam way -->
+  <rect x="378" y="108" width="86" height="76" fill="#111"/>
+  <rect x="394" y="126" width="40" height="52" fill="#ffffff"/>
+  <circle cx="404" cy="120" r="3" fill="#00c853"/>
+  <text class="sub" x="421" y="200">SAMでクリック</text>
+  <text class="sub" x="362" y="224">白＝消す領域（binary mask）</text>
+
+  <path class="flow" d="M474,155 L512,155"/>
+  <text class="sub" x="493" y="145">埋める</text>
+
+  <!-- 3 LaMa -->
+  <rect class="card" x="514" y="96" width="176" height="118" rx="8"/>
+  <text class="st" x="602" y="140">LaMa</text>
+  <text class="sub" x="602" y="162">穴を大域的に見て</text>
+  <text class="sub" x="602" y="180">背景を1回で推論</text>
+
+  <path class="flow" d="M692,155 L730,155"/>
+
+  <!-- 4 result -->
+  <rect class="card" x="732" y="80" width="180" height="150" rx="8"/>
+  <rect x="742" y="90" width="160" height="130" fill="#dce9d6"/>
+  <text class="sub" x="822" y="160" fill="#3a5a2a">背景で自然に穴埋め</text>
+  <text class="st" x="822" y="252">消えた結果</text>
+
+  <text class="sub" x="30" y="300" style="text-anchor:start">LaMa への入力は「画像＋2値マスク」だけ。マスクの作り方は問わないので、<tspan fill="#2f7d4e" font-weight="700">SAMの切り抜き</tspan>をそのまま流し込める。</text>
+  <text class="sub" x="30" y="324" style="text-anchor:start">これまで作った <tspan font-weight="700">クリック切り抜き(SAM)</tspan> と直結：「クリックで選ぶ → LaMaで消す」という物体除去パイプラインになる。</text>
+  <text class="sub" x="30" y="348" style="text-anchor:start">今回の最小デモは手描きブラシ版。マスク元をSAMに差し替えれば自動選択に発展できる。</text>
+</svg>

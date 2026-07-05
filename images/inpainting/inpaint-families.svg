@@ -1,0 +1,79 @@
+<svg viewBox="0 0 980 470" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="470" fill="#ffffff"/>
+  <defs>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:19px;font-weight:700}
+      .hd{font-size:15px;font-weight:700;text-anchor:middle}
+      .rowh{fill:#666;font-size:12px;font-weight:700;text-anchor:end}
+      .cell{fill:#333;font-size:12px;text-anchor:middle}
+      .cellsm{fill:#555;font-size:11px;text-anchor:middle}
+      .c1{fill:#f4f4f5;stroke:#c4c4cc;stroke-width:1.4}
+      .c2{fill:#eef7f0;stroke:#3fae6a;stroke-width:2}
+      .c3{fill:#eef1ff;stroke:#5570e6;stroke-width:1.6}
+      .div{stroke:#ececf0;stroke-width:1}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="36">Inpainting（穴埋め）の3つの流派</text>
+
+  <!-- column headers -->
+  <rect class="c1" x="250" y="60" width="220" height="46" rx="8"/>
+  <text class="hd" x="360" y="82" fill="#444">古典（数式ベース）</text>
+  <text class="cellsm" x="360" y="99">Telea / Navier-Stokes / PatchMatch</text>
+
+  <rect class="c2" x="484" y="60" width="220" height="46" rx="8"/>
+  <text class="hd" x="594" y="82" fill="#2f7d4e">LaMa（学習・今回）</text>
+  <text class="cellsm" x="594" y="99">Fourier Convolution</text>
+
+  <rect class="c3" x="718" y="60" width="230" height="46" rx="8"/>
+  <text class="hd" x="833" y="82" fill="#3a4fc0">拡散（テキスト誘導）</text>
+  <text class="cellsm" x="833" y="99">Stable Diffusion inpaint</text>
+
+  <!-- rows -->
+  <g>
+    <text class="rowh" x="238" y="140">何をする</text>
+    <text class="cell" x="360" y="140">周囲の色を伝播</text>
+    <text class="cell" x="594" y="140">背景をもっともらしく生成</text>
+    <text class="cell" x="833" y="140">指示に沿って描き足す</text>
+  </g>
+  <line class="div" x1="30" y1="158" x2="948" y2="158"/>
+  <g>
+    <text class="rowh" x="238" y="186">仕組み</text>
+    <text class="cellsm" x="360" y="180">近傍から拡散・</text>
+    <text class="cellsm" x="360" y="196">類似パッチを貼る</text>
+    <text class="cellsm" x="594" y="180">FFCで大域を見て</text>
+    <text class="cellsm" x="594" y="196">1回で穴を推論</text>
+    <text class="cellsm" x="833" y="180">ノイズ除去を反復</text>
+    <text class="cellsm" x="833" y="196">＋テキスト条件</text>
+  </g>
+  <line class="div" x1="30" y1="214" x2="948" y2="214"/>
+  <g>
+    <text class="rowh" x="238" y="242">得意</text>
+    <text class="cellsm" x="360" y="236">小さい傷・</text>
+    <text class="cellsm" x="360" y="252">単純な背景</text>
+    <text class="cellsm" x="594" y="236">物体の除去・</text>
+    <text class="cellsm" x="594" y="252">大きな穴の背景復元</text>
+    <text class="cellsm" x="833" y="236">別物を描き込む・</text>
+    <text class="cellsm" x="833" y="252">創造的な差し替え</text>
+  </g>
+  <line class="div" x1="30" y1="270" x2="948" y2="270"/>
+  <g>
+    <text class="rowh" x="238" y="298">苦手</text>
+    <text class="cellsm" x="360" y="292">大きい穴・</text>
+    <text class="cellsm" x="360" y="308">複雑な構造</text>
+    <text class="cellsm" x="594" y="292">新しい物体を</text>
+    <text class="cellsm" x="594" y="308">描き足すこと</text>
+    <text class="cellsm" x="833" y="292">重い・不安定・</text>
+    <text class="cellsm" x="833" y="308">意図せぬ改変</text>
+  </g>
+  <line class="div" x1="30" y1="326" x2="948" y2="326"/>
+  <g>
+    <text class="rowh" x="238" y="354">CPUでの速度</text>
+    <text class="cell" x="360" y="354" fill="#2f7d4e">速い</text>
+    <text class="cell" x="594" y="354" fill="#2f7d4e">実用的（数秒）</text>
+    <text class="cell" x="833" y="354" fill="#c0392b">遅い</text>
+  </g>
+
+  <text class="cellsm" x="30" y="404" style="text-anchor:start">今回のデモは <tspan fill="#2f7d4e" font-weight="700">LaMa</tspan>：物体を「消して背景を埋める」用途にちょうど良く、CPU無料Spaceで動く。</text>
+  <text class="cellsm" x="30" y="426" style="text-anchor:start">「別の物を描き込みたい」なら拡散インペイント、「小さな傷消し」なら古典で十分、という住み分け。</text>
+</svg>
