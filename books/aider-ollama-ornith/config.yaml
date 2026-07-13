@@ -1,0 +1,17 @@
+title: "MacBookでOrnith-1.0-9Bを動かす：Aider + Ollama実践ガイド"
+summary: "MacBook（Apple Silicon）上でローカルLLM「Ornith-1.0-9B」をAider経由で自律コーディングに使うための実践ガイド。Ollama/Aiderの基礎から環境構築、Modelfile作成、実行コマンドの雛形、実測ベンチマーク、Claude Codeとの使い分けまでを1冊にまとめました。"
+topics: ["llm", "ollama", "ai", "python", "coding"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - 01-introduction
+  - 02-ollama
+  - 03-aider
+  - 04-ornith
+  - 05-setup
+  - 06-modelfile
+  - 07-command-template
+  - 08-benchmark
+  - 09-claude-code
+  - 10-summary
