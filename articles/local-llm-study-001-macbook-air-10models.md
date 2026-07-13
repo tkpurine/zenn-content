@@ -3,7 +3,7 @@ title: "ローカルLLM study1: MacBook Airで11モデルを実測してみた"
 emoji: "💻"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: true
+published: false
 ---
 
 ## はじめに
