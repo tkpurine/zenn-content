@@ -3,7 +3,7 @@ title: "生成AIに「超解像（Real-ESRGAN）」を聞いてみた（AI拡大
 emoji: "🔍"
 type: "tech"
 topics: ["ai", "画像処理", "機械学習", "超解像", "python"]
-published: true
+published: false
 ---
 
 ## はじめに
