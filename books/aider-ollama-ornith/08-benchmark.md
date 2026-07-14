@@ -39,6 +39,113 @@ Ollama単体でのチャット形式で、コードレビュー・FizzBuzz生成
 
 唯一のミスは、指定した `slides.html` ではなく別名（`kalman_slides.html`）で保存してしまったことです。**出力ファイル名は毎回確認する**ことをおすすめします。
 
+### 生成物の実例（カルマンフィルタ、独立した再検証）
+
+本書執筆にあたり、7章に掲載したコマンドをそのまま使ってカルマンフィルタタスクを再実行し、実際の生成物を確認しました。所要時間は計画56秒・実装+テスト105秒・スライド558秒で、いずれも一発で完走し、テストは3/3 PASSでした（前述の386秒は初出時の別実行の数値で、モデルの応答速度には毎回ある程度の揺らぎがあります）。
+
+**Stage1（PLAN.md）の抜粋**
+
+```markdown
+# 1次元カルマンフィルタ実装計画
+
+## 状態遷移モデルと観測モデル
+
+### 状態ベクトル
+x = [位置, 速度]^T
+
+### 状態遷移モデル（予測）
+F = [[1, dt],
+     [0, 1]]
+
+x_pred = F * x + B * u
+B = [[dt/2],
+     [0]]
+u = 加速度（デフォルト0）
+
+### 観測モデル
+H = [[1, 0]]   （位置のみ観測）
+```
+
+指示文では触れていない「制御入力（コントロール入力）」まで自主的に設計に加えているのが特徴的です。ただし今回の再実行では、この計画の後半（クラス設計とテスト戦略の一部）が、Aiderのwhole形式パーサーの誤爆によって `戻り値: (x, P)` という奇妙な名前の別ファイルに分かれて保存されてしまいました（7章の注意点3を参照）。これは正しく `PLAN.md` に統合した上で次の段階に進んでいます。
+
+**Stage2（kalman.py）の全文**
+
+```python
+import numpy as np
+
+
+class KalmanFilter:
+    def __init__(self, dt, process_noise=0.1, measurement_noise=0.5):
+        self.dt = dt
+        self.x = np.array([[0.0], [0.0]])
+        self.P = np.eye(2) * 100.0
+        self.F = np.array([[1, dt], [0, 1]], dtype=float)
+        self.B = np.array([[dt / 2], [0]], dtype=float)
+        self.H = np.array([[1, 0]], dtype=float)
+        q = process_noise * dt ** 4 / 4
+        self.Q = np.array([[q, 0], [0, process_noise * dt ** 2 / 4]], dtype=float)
+        self.R = np.array([[measurement_noise]], dtype=float)
+
+    def predict(self, u=0):
+        x_pred = self.F @ self.x + self.B @ np.array([[u]])
+        P_pred = self.F @ self.P @ self.F.T + self.Q
+        return x_pred.copy(), P_pred.copy()
+
+    def update(self, z):
+        z = np.atleast_2d(z)
+        S = self.H @ self.P @ self.H.T + self.R
+        K = self.P @ self.H.T @ np.linalg.inv(S)
+        y = z - self.H @ self.x
+        x_new = self.x + K @ y
+        I = np.eye(2)
+        P_new = (I - K @ self.H) @ self.P
+        self.x = x_new
+        self.P = P_new
+        return self.x.copy(), self.P.copy()
+```
+
+**Stage2（test_kalman.py）の抜粋（3件中1件）**
+
+```python
+def test_covariance_decreases(self):
+    """Initial uncertainty (covariance) should decrease over time."""
+    dt = 0.1
+    filter_ = KalmanFilter(dt=dt, process_noise=0.1, measurement_noise=0.5)
+    initial_trace = float(np.trace(filter_.P))
+
+    for _ in range(20):
+        filter_.predict(u=0)
+        z = np.array([[10.0]])  # constant observation
+        filter_.update(z)
+
+    final_trace = float(np.trace(filter_.P))
+    self.assertLess(final_trace, initial_trace,
+                    msg=f"Covariance trace should decrease: {final_trace:.3f} < {initial_trace:.3f}")
+```
+
+共分散を対角成分ではなく `np.trace(P)`（行列全体のトレース）で評価しているのが特徴で、これは前回検証（gemma4:e2bとの比較時点）でも確認されていた、Ornith-1.0-9B特有の丁寧なテスト設計の傾向と一致します。
+
+**Stage3（slides.html）の抜粋（1枚分）**
+
+```html
+<div class="slide" id="slide-2">
+  <div class="slide-number">3 / 6</div>
+  <h2>状態遷移モデルと観測モデル</h2>
+  <div class="formula">
+  【状態遷移モデル】（予測）
+  x_k = F * x_{k-1} + B * u_k + w_k
+  where:
+    x_k       : k 時点の状態ベクトル [位置, 速度]^T
+    F         : 状態遷移行列 [[1, dt], [0, 1]]
+    B         : コントロール入力行列 [[dt/2], [0]]
+    u_k       : コントロール入力度（ここでは 0）
+    w_k ~ N(0, Q) : プロセスノイズ
+  </div>
+</div>
+```
+
+今回の再検証ではファイル名も指定通り `slides.html` で保存され、ページカウンター・矢印キー操作に加えて、指示していないスワイプ操作（タッチ端末向け）まで自主的に実装されていました。同じモデル・同じ指示文でも、実行ごとに細部の出来栄えや小さな失敗（今回で言えばStage1のファイル名誤爆）にはばらつきが出る、という点も実務上覚えておく価値があります。
+
 ### 複雑なSVD（特異値分解）タスクでの失敗例
 
 べき乗法とデフレーションによるランクk特異値分解という、より難度の高いタスクでは失敗しました。
