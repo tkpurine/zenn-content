@@ -1,0 +1,65 @@
+<svg viewBox="0 0 980 520" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="520" fill="#ffffff"/>
+  <defs>
+    <marker id="at" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:20px;font-weight:700}
+      .hd{font-size:15px;font-weight:700}
+      .nl{fill:#1a1a1a;font-size:12.5px;font-weight:700;text-anchor:middle}
+      .sub{fill:#555;font-size:11px;text-anchor:middle}
+      .subL{fill:#555;font-size:11.5px}
+      .box{fill:#f4f4f5;stroke:#c4c4cc;stroke-width:1.3}
+      .att{fill:#eef1ff;stroke:#5570e6;stroke-width:1.6}
+      .img{fill:#e7f0fb;stroke:#4a86d6;stroke-width:1.6}
+      .txt{fill:#f0eaff;stroke:#8a5cd6;stroke-width:1.6}
+      .flow{stroke:#8a8a8a;stroke-width:1.8;fill:none;marker-end:url(#at)}
+      .panel{fill:none;stroke:#e2e2e6;stroke-width:1.4}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="34">② cross-attention は Transformer の中核「注意機構」</text>
+
+  <!-- Panel A: Transformer block -->
+  <rect class="panel" x="30" y="54" width="300" height="330" rx="10"/>
+  <text class="hd" x="46" y="82" fill="#3a4fc0">① Transformerブロックの中身</text>
+  <rect class="box" x="90" y="96" width="180" height="30" rx="6"/><text class="nl" x="180" y="116">入力トークン列</text>
+  <path class="flow" d="M180,126 L180,142"/>
+  <rect class="att" x="90" y="144" width="180" height="38" rx="6"/><text class="nl" x="180" y="168">Attention（注目）</text>
+  <path class="flow" d="M180,182 L180,198"/>
+  <rect class="box" x="90" y="200" width="180" height="38" rx="6"/><text class="nl" x="180" y="224">MLP（全結合）</text>
+  <path class="flow" d="M180,238 L180,254"/>
+  <rect class="box" x="90" y="256" width="180" height="30" rx="6"/><text class="nl" x="180" y="276">出力</text>
+  <text class="sub" x="180" y="304">残差＋正規化つきで ×N 層 積む</text>
+  <text class="subL" x="46" y="332" style="font-size:10.5px">Attentionの核：各トークンが Q（問い）·K（鍵）で</text>
+  <text class="subL" x="46" y="350" style="font-size:10.5px">類似度→重みを出し、V（値）を加重和。</text>
+  <text class="subL" x="46" y="368" style="font-size:10.5px;font-weight:700;fill:#3a4fc0">＝「どのトークンにどれだけ注目するか」</text>
+
+  <!-- Panel B: self vs cross -->
+  <rect class="panel" x="350" y="54" width="600" height="330" rx="10"/>
+  <text class="hd" x="366" y="82" fill="#2f7d4e">② self と cross の違い（Q·K·Vの出どころ）</text>
+
+  <!-- self -->
+  <text class="nl" x="440" y="118" style="text-anchor:start" fill="#3a4fc0">Self-Attention</text>
+  <rect class="img" x="366" y="128" width="150" height="46" rx="6"/><text class="nl" x="441" y="149">画像トークン列</text><text class="sub" x="441" y="165">Q=K=V（全部同じ）</text>
+  <path class="flow" d="M518,151 L556,151"/>
+  <rect class="box" x="558" y="128" width="180" height="46" rx="6"/><text class="sub" x="648" y="147">画像どうしが注目し合う</text><text class="sub" x="648" y="165">→ 空間の辻褄（絵の整合）</text>
+
+  <line x1="366" y1="196" x2="934" y2="196" stroke="#ececf0" stroke-width="1"/>
+
+  <!-- cross -->
+  <text class="nl" x="440" y="228" style="text-anchor:start" fill="#8a5cd6">Cross-Attention（テキスト誘導）</text>
+  <rect class="img" x="366" y="240" width="130" height="46" rx="6"/><text class="nl" x="431" y="261">画像トークン</text><text class="sub" x="431" y="277">Q（問い）</text>
+  <rect class="txt" x="366" y="300" width="130" height="42" rx="6"/><text class="nl" x="431" y="320">テキスト埋め込み</text><text class="sub" x="431" y="336">K・V（鍵・値）</text>
+  <path class="flow" d="M498,263 L556,275"/>
+  <path class="flow" d="M498,320 L556,289"/>
+  <rect class="box" x="558" y="256" width="200" height="52" rx="6"/><text class="sub" x="658" y="277">画像の各位置がテキストに注目</text><text class="sub" x="658" y="296">→ 意味を画像に注入</text>
+  <text class="sub" x="820" y="284" fill="#8a5cd6">"赤い"→該当領域に効く</text>
+
+  <!-- Panel C: 工夫 -->
+  <rect x="30" y="400" width="920" height="96" rx="10" fill="#fdf6ec" stroke="#e0a72e" stroke-width="1.4"/>
+  <text class="hd" x="48" y="428" fill="#b96f12">③ 拡散での工夫</text>
+  <text class="subL" x="48" y="452" style="font-size:12px">・U-Net（除去ネット）の<tspan font-weight="700">各解像度にTransformerブロックを差し込み</tspan>、その中で self（画像の整合）＋ cross（テキスト注入）を効かせる。</text>
+  <text class="subL" x="48" y="474" style="font-size:12px">・最近は <tspan font-weight="700">DiT</tspan>＝バックボーンを丸ごとTransformer化。<tspan font-weight="700">MMDiT（SD3/Flux）</tspan>＝テキストと画像のトークンを<tspan font-weight="700">連結して1つのattention</tspan>で相互作用（joint attention）。</text>
+</svg>

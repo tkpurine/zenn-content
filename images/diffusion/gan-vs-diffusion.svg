@@ -1,0 +1,68 @@
+<svg viewBox="0 0 980 430" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="430" fill="#ffffff"/>
+  <defs>
+    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:20px;font-weight:700}
+      .hd{font-size:15px;font-weight:700}
+      .nl{fill:#1a1a1a;font-size:12.5px;font-weight:700;text-anchor:middle}
+      .sub{fill:#555;font-size:11px;text-anchor:middle}
+      .box{fill:#f4f4f5;stroke:#c4c4cc;stroke-width:1.4}
+      .gen{fill:#eef1ff;stroke:#5570e6;stroke-width:1.8}
+      .den{fill:#eef7f0;stroke:#3fae6a;stroke-width:1.8}
+      .noise{fill:#3a3a3a}
+      .flow{stroke:#8a8a8a;stroke-width:2;fill:none;marker-end:url(#ag)}
+      .tag{font-size:12px;font-weight:700}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="36">② GAN（一発生成）と 拡散（反復生成）の違い</text>
+
+  <!-- GAN row -->
+  <text class="hd" x="30" y="86" fill="#3a4fc0">GAN（Real-ESRGAN / GFPGAN など）</text>
+  <rect class="noise" x="40" y="100" width="70" height="70" rx="6"/>
+  <text class="sub" x="75" y="188">ノイズ/入力</text>
+  <path class="flow" d="M112,135 L150,135"/>
+  <rect class="gen" x="152" y="104" width="130" height="62" rx="8"/>
+  <text class="nl" x="217" y="130">生成器</text>
+  <text class="sub" x="217" y="150">Generator</text>
+  <path class="flow" d="M284,135 L322,135"/>
+  <rect class="box" x="324" y="100" width="70" height="70" rx="6"/>
+  <text class="sub" x="359" y="140" fill="#3a5a2a">画像</text>
+  <text class="sub" x="359" y="188">完成（1回）</text>
+  <!-- discriminator note (under the generator only) -->
+  <rect x="130" y="182" width="174" height="26" rx="6" fill="#fbfbfd" stroke="#dcdce2" stroke-width="1"/>
+  <text class="sub" x="217" y="199">学習時：識別器と競わせる</text>
+  <text class="tag" x="430" y="120" fill="#2f7d4e">速い（一発）</text>
+  <text class="tag" x="430" y="142" fill="#c0392b">不安定・多様性が出にくい</text>
+  <text class="sub" x="430" y="162" style="text-anchor:start">（モード崩壊しやすい）</text>
+
+  <line x1="30" y1="232" x2="950" y2="232" stroke="#ececf0" stroke-width="1"/>
+
+  <!-- Diffusion row -->
+  <text class="hd" x="30" y="272" fill="#2f7d4e">拡散（Stable Diffusion / Flux など）</text>
+  <rect class="noise" x="40" y="288" width="64" height="64" rx="6"/>
+  <text class="sub" x="72" y="368">純ノイズ</text>
+  <g>
+    <path class="flow" d="M106,320 L138,320"/>
+    <rect class="den" x="140" y="292" width="56" height="56" rx="7"/><text class="nl" x="168" y="324">除去</text>
+    <path class="flow" d="M198,320 L226,320"/>
+    <rect class="den" x="228" y="292" width="56" height="56" rx="7"/><text class="nl" x="256" y="324">除去</text>
+    <path class="flow" d="M286,320 L314,320"/>
+    <text class="nl" x="332" y="325" fill="#888">···</text>
+    <path class="flow" d="M348,320 L376,320"/>
+    <rect class="den" x="378" y="292" width="56" height="56" rx="7"/><text class="nl" x="406" y="324">除去</text>
+    <path class="flow" d="M436,320 L464,320"/>
+  </g>
+  <rect class="box" x="466" y="288" width="64" height="64" rx="6"/>
+  <text class="sub" x="498" y="324" fill="#3a5a2a">画像</text>
+  <text class="sub" x="498" y="368">完成（数十回）</text>
+  <text class="sub" x="286" y="284">同じネットで「1ステップ分のノイズ除去」を反復</text>
+  <text class="tag" x="580" y="308" fill="#2f7d4e">安定・高品質・多様</text>
+  <text class="tag" x="580" y="330" fill="#c0392b">遅い（反復が多い）</text>
+  <text class="sub" x="580" y="350" style="text-anchor:start">→ 少ステップ化・蒸留で高速化（後述）</text>
+
+  <text class="sub" x="30" y="414" style="text-anchor:start">要点：GAN＝<tspan font-weight="700">一発で作る（速いが不安定）</tspan>／拡散＝<tspan font-weight="700" fill="#2f7d4e">少しずつ作る（遅いが安定・高品質）</tspan>。この"反復"が近年の主流になった理由。</text>
+</svg>

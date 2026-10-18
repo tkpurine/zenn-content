@@ -1,0 +1,79 @@
+<svg viewBox="0 0 980 430" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="430" fill="#ffffff"/>
+  <defs>
+    <marker id="al" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:20px;font-weight:700}
+      .nl{fill:#1a1a1a;font-size:13px;font-weight:700;text-anchor:middle}
+      .sub{fill:#555;font-size:11px;text-anchor:middle}
+      .box{fill:#f4f4f5;stroke:#c4c4cc;stroke-width:1.4}
+      .enc{fill:#eef1ff;stroke:#5570e6;stroke-width:1.8}
+      .dec{fill:#eef7f0;stroke:#3fae6a;stroke-width:1.8}
+      .lat{fill:#fff7ec;stroke:#e08a1e;stroke-width:2}
+      .unet{fill:#fdefd8;stroke:#e08a1e;stroke-width:2}
+      .txt{fill:#f0eaff;stroke:#8a5cd6;stroke-width:1.8}
+      .flow{stroke:#8a8a8a;stroke-width:2;fill:none;marker-end:url(#al)}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="36">③ Latent Diffusion（Stable Diffusion）：小さな"潜在"で拡散するから軽い</text>
+
+  <!-- image in -->
+  <rect class="box" x="30" y="176" width="92" height="92" rx="6"/>
+  <rect x="38" y="184" width="76" height="76" fill="#cfe0ef"/>
+  <circle cx="92" cy="205" r="11" fill="#ffd76b"/><rect x="38" y="240" width="76" height="20" fill="#8fbf7a"/>
+  <text class="sub" x="76" y="286">画像（大きい）</text>
+
+  <path class="flow" d="M124,222 L156,222"/>
+
+  <!-- encoder -->
+  <rect class="enc" x="158" y="192" width="84" height="58" rx="8"/>
+  <text class="nl" x="200" y="216">Encoder</text>
+  <text class="sub" x="200" y="235">圧縮する</text>
+
+  <path class="flow" d="M244,222 L276,222"/>
+
+  <!-- latent grid -->
+  <rect class="lat" x="278" y="176" width="112" height="92" rx="8"/>
+  <text class="nl" x="334" y="168" fill="#b96f12">潜在（小さい）</text>
+  <g fill="#e08a1e" opacity="0.55">
+    <rect x="292" y="190" width="14" height="14"/><rect x="311" y="190" width="14" height="14"/><rect x="330" y="190" width="14" height="14"/><rect x="349" y="190" width="14" height="14"/><rect x="368" y="190" width="14" height="14"/>
+    <rect x="292" y="209" width="14" height="14"/><rect x="311" y="209" width="14" height="14"/><rect x="330" y="209" width="14" height="14"/><rect x="349" y="209" width="14" height="14"/><rect x="368" y="209" width="14" height="14"/>
+    <rect x="292" y="228" width="14" height="14"/><rect x="311" y="228" width="14" height="14"/><rect x="330" y="228" width="14" height="14"/><rect x="349" y="228" width="14" height="14"/><rect x="368" y="228" width="14" height="14"/>
+  </g>
+  <text class="sub" x="334" y="286" fill="#b96f12">★ この潜在で拡散（軽い）</text>
+
+  <path class="flow" d="M392,222 L424,222"/>
+
+  <!-- U-Net / DiT -->
+  <rect class="unet" x="426" y="188" width="118" height="66" rx="8"/>
+  <text class="nl" x="485" y="214" fill="#b96f12">U-Net / DiT</text>
+  <text class="sub" x="485" y="234">潜在ノイズを除去 ×N</text>
+
+  <path class="flow" d="M546,222 L578,222"/>
+
+  <!-- decoder -->
+  <rect class="dec" x="580" y="192" width="84" height="58" rx="8"/>
+  <text class="nl" x="622" y="216">Decoder</text>
+  <text class="sub" x="622" y="235">復元する</text>
+
+  <path class="flow" d="M666,222 L698,222"/>
+
+  <!-- generated image -->
+  <rect class="box" x="700" y="176" width="92" height="92" rx="6"/>
+  <rect x="708" y="184" width="76" height="76" fill="#cfe0ef"/>
+  <circle cx="762" cy="205" r="11" fill="#ffd76b"/><rect x="708" y="240" width="76" height="20" fill="#8fbf7a"/>
+  <text class="sub" x="746" y="286">生成画像</text>
+
+  <!-- text condition, above U-Net -->
+  <rect class="txt" x="392" y="86" width="200" height="56" rx="8"/>
+  <text class="nl" x="492" y="110" fill="#6a44b0">テキスト条件</text>
+  <text class="sub" x="492" y="128">"a sunny hill" → CLIP埋め込み</text>
+  <path class="flow" d="M492,142 L488,184"/>
+  <text class="sub" x="600" y="166" fill="#6a44b0">プロンプトで誘導（CFGで忠実度を調整）</text>
+
+  <text class="sub" x="30" y="372" style="text-anchor:start">ピクセルそのままだと拡散は重い → <tspan font-weight="700" fill="#b96f12">Encoderで圧縮した小さな潜在で拡散</tspan>し、最後にDecoderで戻す。これで一般GPUでも動く。</text>
+  <text class="sub" x="30" y="396" style="text-anchor:start">テキスト→画像は、CLIP等のテキスト埋め込みを条件に入れ、<tspan font-weight="700" fill="#6a44b0">Classifier-Free Guidance</tspan> でプロンプトへの忠実度を強める。</text>
+</svg>

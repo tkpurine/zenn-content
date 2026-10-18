@@ -1,0 +1,65 @@
+<svg viewBox="0 0 980 470" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="470" fill="#ffffff"/>
+  <defs>
+    <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:20px;font-weight:700}
+      .nl{fill:#1a1a1a;font-size:14px;font-weight:700;text-anchor:middle}
+      .sub{fill:#555;font-size:11.5px;text-anchor:middle}
+      .subL{fill:#555;font-size:11.5px}
+      .prompt{fill:#f4f4f5;stroke:#c4c4cc;stroke-width:1.4}
+      .clip{fill:#eef1ff;stroke:#5570e6;stroke-width:2}
+      .t5{fill:#eef7f0;stroke:#3fae6a;stroke-width:2}
+      .net{fill:#fdefd8;stroke:#e08a1e;stroke-width:2}
+      .flow{stroke:#8a8a8a;stroke-width:2;fill:none;marker-end:url(#ac)}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="36">テキストを数値化する2枚看板：CLIP（視覚的ラフ）と T5（言語の精読）</text>
+
+  <!-- prompt -->
+  <rect class="prompt" x="30" y="196" width="180" height="70" rx="8"/>
+  <text class="nl" x="120" y="226">プロンプト</text>
+  <text class="sub" x="120" y="248">「夕焼けの丘に立つ</text>
+  <text class="sub" x="120" y="262">赤い傘の少女」</text>
+
+  <path class="flow" d="M212,214 C250,196 260,150 296,142"/>
+  <path class="flow" d="M212,248 C250,266 260,314 296,322"/>
+
+  <!-- CLIP -->
+  <rect class="clip" x="298" y="96" width="250" height="96" rx="8"/>
+  <text class="nl" x="423" y="124" fill="#3a4fc0">CLIP</text>
+  <text class="sub" x="423" y="146">画像に接地した"ざっくり視覚意味"</text>
+  <text class="sub" x="423" y="164">＝何が写る・全体の雰囲気/スタイル</text>
+  <text class="sub" x="423" y="182">（絵の"参考イメージ"に近い）</text>
+
+  <!-- T5 -->
+  <rect class="t5" x="298" y="272" width="250" height="96" rx="8"/>
+  <text class="nl" x="423" y="300" fill="#2f7d4e">T5</text>
+  <text class="sub" x="423" y="322">文の"詳細な意味・構造"を精読</text>
+  <text class="sub" x="423" y="340">＝誰が/何を/色/数/関係/長い指示</text>
+  <text class="sub" x="423" y="358">（"注文書"を正確に読む担当）</text>
+
+  <!-- both to vectors -->
+  <path class="flow" d="M550,144 C588,160 596,196 632,210"/>
+  <path class="flow" d="M550,320 C588,304 596,268 632,250"/>
+  <text class="sub" x="592" y="200">意味ベクトル列</text>
+
+  <!-- denoiser -->
+  <rect class="net" x="634" y="188" width="150" height="86" rx="8"/>
+  <text class="nl" x="709" y="222" fill="#b96f12">除去ネット</text>
+  <text class="sub" x="709" y="242">U-Net / DiT</text>
+  <text class="sub" x="709" y="260">＝実際に描く</text>
+
+  <path class="flow" d="M786,231 L820,231"/>
+  <rect class="prompt" x="822" y="188" width="128" height="86" rx="8"/>
+  <rect x="838" y="200" width="96" height="62" fill="#cfe0ef"/>
+  <circle cx="862" cy="216" r="8" fill="#ffb066"/>
+  <rect x="838" y="244" width="96" height="18" fill="#c98f6a"/>
+  <text class="sub" x="886" y="290">生成画像</text>
+
+  <text class="subL" x="30" y="420" style="font-size:12px">ポイント：CLIPもT5も作るのは<tspan font-weight="700">"意味ベクトル"だけ</tspan>。<tspan font-weight="700" fill="#b96f12">画像を描くのは後段の除去ネット</tspan>。CLIP＝視覚的なラフ、T5＝言語の精読、で役割分担。</text>
+  <text class="subL" x="30" y="444" style="font-size:12px">だから「T5が詳細な"画像"を作る」のではなく、「T5が詳細な"文の意味"を渡し、除去ネットがそれを絵にする」が正確。SD3/Fluxは両方を併用。</text>
+</svg>

@@ -20,17 +20,19 @@ published: true
 
 ## デモで試す
 
-作ったデモ → **https://huggingface.co/spaces/tkawano/object-removal**
+**既存のSAMデモに「消す」モードを追加**しました → **https://huggingface.co/spaces/tkawano/click-to-segment**
 
 使い方:
-1. 画像を**アップロード**
-2. **ブラシ**で消したい物体を塗りつぶす（人・看板・シミなど）。フチや影まで覆うと綺麗
-3. **Remove (inpaint)** を押す
-4. **Mask preview** で「実際に埋めた範囲」を確認
+1. 画像を**アップロード**し、消したい物体を**クリック**して選ぶ（SAM）
+2. **Result mode** を **Erase selection (remove object)** に切り替える
+3. **Add object** を押すと、選んだ領域を**LaMaが消して背景を埋める**
+4. モードを **Extract** に戻せば同じ選択で「切り抜き」に、いつでも切替可能
+
+> 独立したデモを新規に立てると Hugging Face の無料枠（ハードウェア上限）に当たったので、**新Spaceを増やさず既存デモに機能を足す**方針にしました。SAMのマスクをそのままLaMaの穴埋めに使えるので、むしろ自然な統合です。
 
 ## 「選ぶ → 消す」：マスクさえ作ればいい
 
-LaMaへの入力は**「画像＋2値マスク（白＝消す領域）」だけ**。マスクの作り方は問いません。今回は手描きブラシですが、**これまで作ったSAMの切り抜きをそのまま流し込めば「クリックで選ぶ→LaMaで消す」**という物体除去パイプラインになります。
+LaMaへの入力は**「画像＋2値マスク（白＝消す領域）」だけ**。マスクの作り方は問いません。**SAMでクリックして選んだ領域をそのままLaMaの穴として渡す**ことで、「クリックで選ぶ→LaMaで消す」という物体除去が1つのデモで完結します（手描きブラシでマスクを作ってもOK）。
 
 ![選ぶ→消す：マスクは手描きでもSAMでもいい](/images/inpainting/select-then-remove.png)
 
@@ -54,21 +56,16 @@ LaMaは**大量の「劣化（穴あき）画像→元画像」ペアで学習**
 
 ### Q5. マスクはどう作る？ 実装で工夫した点
 
-Gradio 5 の `gr.ImageEditor` でブラシ塗りさせ、その**塗った層(layer)のアルファから2値マスクを作成**しています。ただしバージョンによって塗りが `layers` に入らないことがあるため、**入っていなければ `composite` と `background` の差分からマスクを復元**するフォールバックも入れました。さらに **「Grow mask（膨張）」スライダー**で数px広げ、**物体のフチや影を取りこぼさない**ようにしています（`cv2.dilate`）。
+デモでは**SAMでクリックして選んだ領域（union マスク）を、そのままLaMaの穴として渡す**だけです。SAMの出力アルファを2値化し、**数px膨張（`cv2.dilate`）して物体のフチや影を取りこぼさない**ようにしてからLaMaに投げます。
 
 ```python
-def _extract(editor):
-    bg = editor["background"].convert("RGB")
-    mask = np.zeros(bg.size[::-1], np.uint8)
-    for ly in (editor.get("layers") or []):          # 塗った層のalpha
-        a = np.array(ly.convert("RGBA"))[:, :, 3]
-        mask = np.maximum(mask, (a > 0).astype(np.uint8) * 255)
-    if mask.max() == 0:                               # フォールバック：合成との差分
-        comp = np.array(editor["composite"].convert("RGB")).astype(int)
-        diff = np.abs(comp - np.array(bg).astype(int)).sum(2)
-        mask = (diff > 30).astype(np.uint8) * 255
-    return bg, mask
+def _erase(base, alpha):                 # alpha = SAMで選択したunionマスク
+    mask = (alpha > 127).astype(np.uint8) * 255
+    mask = cv2.dilate(mask, np.ones((7, 7), np.uint8), 1)  # 縁・影まで覆う
+    return get_lama()(base.convert("RGB"), Image.fromarray(mask))  # LaMaが穴を埋める
 ```
+
+同じ選択を、モードで**「切り抜き（RGBAで残す）／消去（LaMaで埋める）」**に振り分けています。マスク元はSAMに限らず、手描きブラシ（`gr.ImageEditor`の塗り層）でも同じように作れます。
 
 ### Q6. CPUで実用になる？
 
@@ -76,10 +73,10 @@ def _extract(editor):
 
 ## 実際に作ってわかったこと
 
-- **マスクの取り方が地味に鬼門**：ImageEditorは「塗った層」を直接くれないことがある → `layers` 優先＋`composite`差分のフォールバックが安定
-- **膨張(dilate)が効く**：物体ちょうどに塗っても縁や影が残りがち → 数px広げると自然に消える
+- **SAMと直結が自然**：SAMの選択マスクをそのままLaMaの穴に使えるので、「クリックで選ぶ→消す」が1デモで完結
+- **無料枠の制約が設計を決めた**：独立デモを増やすとHF無料枠のハードウェア上限に当たった → **新Spaceを立てず既存デモにモード追加**したら、結果的に体験も良くなった
+- **膨張(dilate)が効く**：物体ちょうどのマスクだと縁や影が残りがち → 数px広げると自然に消える
 - **LaMaは"消す"専用**：新しい物を描き足すのは範囲外。そこは拡散インペイントの仕事
-- **SAMと直結できる**：マスク元を差し替えるだけで「クリックで選ぶ→消す」に発展
 
 ## まとめ
 

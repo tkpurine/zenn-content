@@ -1,0 +1,69 @@
+<svg viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans CJK JP', sans-serif">
+  <rect x="0" y="0" width="980" height="560" fill="#ffffff"/>
+  <defs>
+    <marker id="af" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <marker id="afp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6a44b0"/>
+    </marker>
+    <style>
+      .ttl{fill:#1a1a1a;font-size:20px;font-weight:700}
+      .hd{font-size:15px;font-weight:700}
+      .sub{fill:#555;font-size:11.5px}
+      .subc{fill:#555;font-size:11.5px;text-anchor:middle}
+      .panel{fill:none;stroke:#e2e2e6;stroke-width:1.4}
+      .bad{fill:#fdecea;stroke:#d9776c;stroke-width:1.5}
+      .old{fill:#f6f6f8;stroke:#c4c4cc;stroke-width:1.4}
+      .new{fill:#f3eefb;stroke:#8a5cd6;stroke-width:1.8}
+      .note{fill:#fdf6ec;stroke:#e0a72e;stroke-width:1.4}
+    </style>
+  </defs>
+
+  <text class="ttl" x="30" y="34">③ Classifier-Free Guidance（CFG）：なぜ2回走らせて"増幅"するのか</text>
+
+  <!-- 課題 -->
+  <rect class="bad" x="30" y="52" width="920" height="52" rx="8"/>
+  <text class="hd" x="48" y="76" fill="#c0392b">課題</text>
+  <text class="sub" x="110" y="72" style="font-size:12px">素の条件付き拡散は、<tspan font-weight="700">プロンプトが弱くしか効かない</tspan>（指示を無視したり、ぼんやりした絵になる）。</text>
+  <text class="sub" x="110" y="92" style="font-size:12px">→「もっとプロンプトに従わせたい」。でも、ただ条件を入れるだけでは足りなかった。</text>
+
+  <!-- 旧 -->
+  <rect class="old" x="30" y="120" width="300" height="150" rx="10"/>
+  <text class="hd" x="46" y="146" fill="#555">旧：classifier guidance</text>
+  <text class="sub" x="46" y="172">別に用意した<tspan font-weight="700">画像分類器の勾配</tspan>で</text>
+  <text class="sub" x="46" y="190">「そのクラスらしく」押す。</text>
+  <text class="sub" x="46" y="216" style="fill:#c0392b">難点：</text>
+  <text class="sub" x="46" y="234" style="fill:#c0392b">・ノイズ画像用の分類器を別途学習</text>
+  <text class="sub" x="46" y="252" style="fill:#c0392b">・クラスラベル限定（自由文が苦手）・複雑</text>
+
+  <!-- 今 -->
+  <rect class="new" x="350" y="120" width="600" height="270" rx="10"/>
+  <text class="hd" x="366" y="146" fill="#6a44b0">今：Classifier-Free Guidance（分類器なし）</text>
+  <text class="sub" x="366" y="172" style="font-size:12px">学習時に<tspan font-weight="700">条件をときどきドロップ（空に）</tspan>して鍛える → <tspan font-weight="700">1つのネットが cond/uncond 両方</tspan>を予測できる。</text>
+  <text class="sub" x="366" y="192" style="font-size:12px">生成時は2回走らせ、その<tspan font-weight="700">差分＝プロンプトの寄与</tspan>を w 倍に増幅する：</text>
+
+  <!-- formula -->
+  <rect x="366" y="206" width="560" height="34" rx="6" fill="#ffffff" stroke="#d9cff0" stroke-width="1.2"/>
+  <text x="646" y="229" style="font-size:14px;font-weight:700;fill:#3a2c66;text-anchor:middle">ε = ε_uncond + w · ( ε_cond − ε_uncond )</text>
+
+  <!-- vector diagram -->
+  <circle cx="410" cy="300" r="5" fill="#888"/>
+  <text class="subc" x="410" y="326">条件なし</text><text class="subc" x="410" y="340">(uncond)</text>
+  <path d="M415,300 L560,300" stroke="#8a8a8a" stroke-width="2.4" marker-end="url(#af)"/>
+  <circle cx="565" cy="300" r="5" fill="#4a86d6"/>
+  <text class="subc" x="565" y="326">条件あり</text><text class="subc" x="565" y="340">(cond)</text>
+  <path d="M570,300 L760,300" stroke="#6a44b0" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#afp)"/>
+  <circle cx="765" cy="300" r="5" fill="#6a44b0"/>
+  <text class="subc" x="765" y="326" fill="#6a44b0">さらに外挿</text><text class="subc" x="765" y="340" fill="#6a44b0">(w倍)</text>
+  <text class="sub" x="470" y="286" style="text-anchor:middle;fill:#555">差分＝プロンプトの向き</text>
+  <text class="sub" x="820" y="300" style="fill:#6a44b0">w大ほど強く効く</text>
+  <text class="sub" x="366" y="372" style="font-size:11px">※ w=1 なら普通の条件付き。w を上げるほどプロンプト忠実↑（だが過飽和・多様性↓のトレードオフ）。</text>
+
+  <!-- bottom note -->
+  <rect class="note" x="30" y="410" width="920" height="120" rx="10"/>
+  <text class="hd" x="48" y="438" fill="#b96f12">まとめ：CFGは何のため？</text>
+  <text class="sub" x="48" y="464" style="font-size:12px">・<tspan font-weight="700">プロンプト忠実度を"生成時に"調整するツマミ</tspan>を作るため。分類器なしで実現し、自由文にも効く。</text>
+  <text class="sub" x="48" y="488" style="font-size:12px">・<tspan font-weight="700">ネガティブプロンプト</tspan>＝この "uncond（条件なし）" の枠に「避けたい語」を入れる仕組み。その方向から遠ざかる。</text>
+  <text class="sub" x="48" y="512" style="font-size:12px">・実務では w（guidance scale）＝7〜8前後が定番。大きすぎると色が飽和し不自然になりやすい。</text>
+</svg>
