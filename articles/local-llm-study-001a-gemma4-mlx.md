@@ -3,7 +3,7 @@ title: "ローカルLLM study1-a: gemma4:e2b/e4bのMLX版はどれだけ速い�
 emoji: "⚡"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "mlx"]
-published: false
+published: true
 ---
 
 ## この記事について

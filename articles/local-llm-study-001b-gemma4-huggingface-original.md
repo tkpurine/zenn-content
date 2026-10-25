@@ -3,7 +3,7 @@ title: "ローカルLLM study1-b: Hugging Faceオリジナル版Gemma 4を動か
 emoji: "🤗"
 type: "tech"
 topics: ["llm", "huggingface", "ai", "python", "transformers"]
-published: false
+published: true
 ---
 
 ## この記事について

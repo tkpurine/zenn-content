@@ -3,7 +3,7 @@ title: "ローカルLLM study3-a: gemma4:e2b-mlx/e4b-mlxをstudy3の手法で検
 emoji: "🧪"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "mlx"]
-published: false
+published: true
 ---
 
 ## この記事について

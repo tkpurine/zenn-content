@@ -3,7 +3,7 @@ title: "ローカルLLM study2: Aiderで自律コーディングをさせてみ�
 emoji: "🔍"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: false
+published: true
 ---
 
 ## 前回のおさらい

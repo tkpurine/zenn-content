@@ -3,7 +3,7 @@ title: "ローカルLLM study3: gemma4:e2b vs Ornith-1.0-9B vs qwen3:14bを徹�
 emoji: "🏁"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: false
+published: true
 ---
 
 ## 前回のおさらい
