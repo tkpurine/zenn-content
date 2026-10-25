@@ -3,7 +3,7 @@ title: "ローカルLLM study1-c: Ornith-1.5-9BはOrnith-1.0-9Bより速くな�
 emoji: "🐦"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: false
+published: true
 ---
 
 ## この記事について
