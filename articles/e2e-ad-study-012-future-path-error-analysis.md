@@ -79,3 +79,7 @@ segment 5  true std: 2.8173, pred std: 0.6529
 future path target自体は使えそうです。ただし、2routeだけではカーブの分布が足りません。
 
 次は、Chunk_1からroute数を増やしたmanifestを作り、route holdoutのままfuture pathモデルを再学習します。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

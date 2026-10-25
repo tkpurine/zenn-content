@@ -128,3 +128,7 @@ residual XY:
 `x` はresidualとして扱う方が良いことは確認できました。
 
 次は、x residual headとy headを分けるか、loss weightを調整します。また、best checkpointを物理的な2D L2で選べるようrunnerも直します。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

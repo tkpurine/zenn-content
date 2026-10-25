@@ -117,3 +117,7 @@ future path targetは作れました。steeringとも相関が高く、targetと
 一方で、今のデータは直進が多く、zero lateral baselineがかなり強いです。
 
 次はfuture path予測の可視化と、3秒先lateralの大誤差segment確認を進めます。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

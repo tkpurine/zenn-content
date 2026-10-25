@@ -184,3 +184,7 @@ Study20 baseline retrain
 300 segment以上になった段階で、Study20相当のbaselineを新splitで再実行します。
 
 その結果を、今後のtemporal Transformerやmulti-hypothesis trajectoryの基準にします。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

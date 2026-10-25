@@ -69,3 +69,7 @@ true steeringには急な山が2回あります。
 sample weightingやspeed fusionだけでは、大舵角binの問題は解けなさそうです。
 
 次は、manifestにfuture path / curvature系のtargetを追加できるか調べます。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

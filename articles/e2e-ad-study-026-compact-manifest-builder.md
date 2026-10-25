@@ -340,3 +340,7 @@ future_3s_y_m: 13.2917
 次は、このfull compact datasetをKaggle datasetとしてuploadします。
 
 その後、Study20の設定をData v2に載せ替え、baseline trainingを実行します。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

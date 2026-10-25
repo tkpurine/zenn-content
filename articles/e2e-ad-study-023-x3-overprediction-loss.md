@@ -179,3 +179,7 @@ Study21とStudy23は失敗ではなく、診断として使います。
 5. strong decel、stop approach、low-speed followingをepisode単位で評価する
 
 次の実装作業は、lossではなくsplit generatorと評価基盤です。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

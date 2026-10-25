@@ -130,3 +130,7 @@ pred steering std: 1.2655 deg
 - steering bin別MAEをtraining scriptの標準出力に入れる
 - speedを画像特徴に結合するbaselineを作る
 - KaggleでT4など `sm_70` 以上のGPUを使える設定を探る
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。

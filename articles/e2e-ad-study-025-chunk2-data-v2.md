@@ -178,3 +178,7 @@ compact datasetへ書き出し
 まずは10 segment程度のsmoke testで、同期、future path補間、split反映、frame抽出を確認します。
 
 それが通ったら、382 segment全体のcompact datasetを作ります。
+
+---
+
+> 🤖 本記事は、生成AIとの対話をもとに構成・編集しています。内容は公開時点で筆者が確認していますが、最新情報は各公式リポジトリ・論文もあわせてご確認ください。
