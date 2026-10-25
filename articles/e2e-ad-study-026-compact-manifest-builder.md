@@ -45,13 +45,13 @@ compact framesとmanifestへ保存
 ## 実装したscript
 
 ```text
-/Users/tkawano/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py
+~/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py
 ```
 
 syntax check:
 
 ```bash
-python3 -m py_compile /Users/tkawano/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py
+python3 -m py_compile ~/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py
 ```
 
 manifestには、画像path、segment、split、速度、操舵角、同期ずれ、future path targetを出します。
@@ -85,10 +85,10 @@ global poseを線形補間し、現在位置から1秒後の位置への方向�
 まずはtrain/dev/testから2 segmentずつ、合計6 segmentで試しました。
 
 ```bash
-python3 /Users/tkawano/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py \
-  --inventory /Users/tkawano/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2/segment_inventory.csv \
-  --out-dir /Users/tkawano/datasets/comma2k19/manifests/data_v2_chunk1_2_compact_smoke_balanced \
-  --temp-dir /Users/tkawano/datasets/comma2k19/tmp \
+python3 ~/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py \
+  --inventory ~/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2/segment_inventory.csv \
+  --out-dir ~/datasets/comma2k19/manifests/data_v2_chunk1_2_compact_smoke_balanced \
+  --temp-dir ~/datasets/comma2k19/tmp \
   --splits train,dev,test \
   --limit-segments-per-split 2 \
   --sample-every 10 \
@@ -98,7 +98,7 @@ python3 /Users/tkawano/e2e_ad_study_work/tools/build_compact_future_path_manifes
 出力:
 
 ```text
-/Users/tkawano/datasets/comma2k19/manifests/data_v2_chunk1_2_compact_smoke_balanced
+~/datasets/comma2k19/manifests/data_v2_chunk1_2_compact_smoke_balanced
 ```
 
 サイズ:
@@ -179,10 +179,10 @@ kept rowsのtarget分布です。
 smoke testが通ったので、次に10 segment per split、合計30 segmentでも実行しました。
 
 ```bash
-python3 /Users/tkawano/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py \
-  --inventory /Users/tkawano/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2/segment_inventory.csv \
-  --out-dir /Users/tkawano/datasets/comma2k19/manifests/data_v2_chunk1_2_compact_pilot30 \
-  --temp-dir /Users/tkawano/datasets/comma2k19/tmp \
+python3 ~/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py \
+  --inventory ~/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2/segment_inventory.csv \
+  --out-dir ~/datasets/comma2k19/manifests/data_v2_chunk1_2_compact_pilot30 \
+  --temp-dir ~/datasets/comma2k19/tmp \
   --splits train,dev,test \
   --limit-segments-per-split 10 \
   --sample-every 10 \
@@ -255,10 +255,10 @@ compact builderのsmoke testは通りました。
 そのままChunk_1+2の全382 segmentをcompact化しました。
 
 ```bash
-python3 /Users/tkawano/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py \
-  --inventory /Users/tkawano/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2/segment_inventory.csv \
-  --out-dir /Users/tkawano/datasets/comma2k19/manifests/data_v2_chunk1_2_compact \
-  --temp-dir /Users/tkawano/datasets/comma2k19/tmp \
+python3 ~/e2e_ad_study_work/tools/build_compact_future_path_manifest_from_inventory.py \
+  --inventory ~/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2/segment_inventory.csv \
+  --out-dir ~/datasets/comma2k19/manifests/data_v2_chunk1_2_compact \
+  --temp-dir ~/datasets/comma2k19/tmp \
   --splits train,dev,test \
   --sample-every 10 \
   --image-width 320

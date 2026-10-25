@@ -50,7 +50,7 @@ https://huggingface.co/datasets/commaai/comma2k19/resolve/main/raw_data/Chunk_2.
 保存先:
 
 ```text
-/Users/tkawano/datasets/comma2k19/downloads/Chunk_2.zip
+~/datasets/comma2k19/downloads/Chunk_2.zip
 ```
 
 サイズ:
@@ -69,7 +69,7 @@ first: Chunk_2/
 Academic Torrentsのtorrent metadataも保存しました。
 
 ```text
-/Users/tkawano/datasets/comma2k19/downloads/comma2k19.torrent
+~/datasets/comma2k19/downloads/comma2k19.torrent
 ```
 
 ## Chunk_1+2のinventory
@@ -78,8 +78,8 @@ Academic Torrentsのtorrent metadataも保存しました。
 
 ```bash
 python3 build_comma2k19_data_v2_inventory.py \
-  --dataset-root /Users/tkawano/datasets/comma2k19 \
-  --out-dir /Users/tkawano/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2 \
+  --dataset-root ~/datasets/comma2k19 \
+  --out-dir ~/datasets/comma2k19/manifests/data_v2_inventory_chunk1_2 \
   --seed 42
 ```
 
@@ -169,7 +169,7 @@ compact datasetへ書き出し
 出力目標:
 
 ```text
-/Users/tkawano/datasets/comma2k19/manifests/data_v2_chunk1_2_compact/
+~/datasets/comma2k19/manifests/data_v2_chunk1_2_compact/
   manifest_speed5_steer30_route_holdout_future_path_interp.csv
   frames/
   summary.json

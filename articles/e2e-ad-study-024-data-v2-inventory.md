@@ -75,7 +75,7 @@ extract_comma2k19_segments_from_inventory.py
 手元にあったのは `Chunk_1.zip` です。
 
 ```text
-/Users/tkawano/datasets/comma2k19/downloads/Chunk_1.zip
+~/datasets/comma2k19/downloads/Chunk_1.zip
 ```
 
 集計結果はこうでした。

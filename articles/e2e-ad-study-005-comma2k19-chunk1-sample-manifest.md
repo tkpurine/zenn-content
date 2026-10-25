@@ -51,8 +51,8 @@ segments: 10
 
 ```bash
 python3 build_comma2k19_manifest.py \
-  --root /Users/tkawano/datasets/comma2k19/extracted/chunk1_sample/Chunk_1 \
-  --output-root /Users/tkawano/datasets/comma2k19/manifests/chunk1_sample_10seg \
+  --root ~/datasets/comma2k19/extracted/chunk1_sample/Chunk_1 \
+  --output-root ~/datasets/comma2k19/manifests/chunk1_sample_10seg \
   --sample-every 10 \
   --width 582 \
   --max-delta-sec 0.02 \
