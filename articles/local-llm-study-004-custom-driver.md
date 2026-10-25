@@ -8,7 +8,7 @@ published: false
 
 ## この記事について
 
-[study3](https://zenn.dev/) と [study3-a](https://zenn.dev/) を通じて、Aiderの`--edit-format whole`パーサーが「ファイル名とコードフェンスの境界」を誤解釈し、正しく生成されたはずのコードが0バイトファイルやゴミファイルとして失われる事故を繰り返し観測しました。特にstudy3-aでは、`gemma4:e2b-mlx`が検証した2タスクとも初回にこの事故を起こしています。
+[study3](https://zenn.dev/tkpurine/articles/local-llm-study-003-gemma-vs-ornith) と [study3-a](https://zenn.dev/tkpurine/articles/local-llm-study-003a-gemma4-mlx) を通じて、Aiderの`--edit-format whole`パーサーが「ファイル名とコードフェンスの境界」を誤解釈し、正しく生成されたはずのコードが0バイトファイルやゴミファイルとして失われる事故を繰り返し観測しました。特にstudy3-aでは、`gemma4:e2b-mlx`が検証した2タスクとも初回にこの事故を起こしています。
 
 この失敗はモデルの能力ではなくAiderのパース層の問題に見えたため、「用途を1リクエスト1ファイルに限定した自作ドライバを作れば、この失敗クラスを構造的に消せるのでは」という仮説を立て、実際に作って検証しました。
 

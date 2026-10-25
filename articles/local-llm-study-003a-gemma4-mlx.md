@@ -8,7 +8,7 @@ published: true
 
 ## この記事について
 
-[study1-a](https://zenn.dev/) では、単発のQ&Aタスク（コードレビュー・FizzBuzz・バグ検出・デコレーター説明）で `gemma4:e2b-mlx`・`gemma4:e4b-mlx` が通常版より2〜5倍速いことを確認しました。一方 [study3](https://zenn.dev/) では、`gemma4:e2b` を含む3モデルで「計画→実装+テスト→ドキュメント化」という3段階のエンドツーエンドタスク（カルマンフィルタ・SVD）を検証しています。
+[study1-a](https://zenn.dev/tkpurine/articles/local-llm-study-001a-gemma4-mlx) では、単発のQ&Aタスク（コードレビュー・FizzBuzz・バグ検出・デコレーター説明）で `gemma4:e2b-mlx`・`gemma4:e4b-mlx` が通常版より2〜5倍速いことを確認しました。一方 [study3](https://zenn.dev/tkpurine/articles/local-llm-study-003-gemma-vs-ornith) では、`gemma4:e2b` を含む3モデルで「計画→実装+テスト→ドキュメント化」という3段階のエンドツーエンドタスク（カルマンフィルタ・SVD）を検証しています。
 
 今回は、study3と同じ2タスク・同じ指示文・同じ3段階プロセスを、MLX版の `gemma4:e2b-mlx`・`gemma4:e4b-mlx` で実施しました。「単発のQ&Aでは速くて優秀」という結論が、より複雑な自律タスクでも成り立つのかを確かめるのが狙いです。
 
@@ -29,7 +29,7 @@ study3と全く同じ指示文（PLAN.md作成→実装+テスト→スライド
 
 ### e2b-mlx：whole形式パーサーが崩壊し、実装にも実在するバグがあった
 
-Stage1（計画）は25秒で完了し、数式・クラス設計とも正確でした。ところがStage2（実装+テスト）の1回目で、[study1](https://zenn.dev/) 系の本で紹介した「whole形式パーサーの誤爆」が発生しました。モデルの応答が
+Stage1（計画）は25秒で完了し、数式・クラス設計とも正確でした。ところがStage2（実装+テスト）の1回目で、[study1](https://zenn.dev/tkpurine/articles/local-llm-study-001-macbook-air-10models) 系の本で紹介した「whole形式パーサーの誤爆」が発生しました。モデルの応答が
 
 ```
 kalman.py

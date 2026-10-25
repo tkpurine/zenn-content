@@ -8,7 +8,7 @@ published: false
 
 ## この記事について
 
-[study1-c](https://zenn.dev/) で、新しく公開された `Ornith-1.5-9B` を単発Q&Aタスクで検証したところ、`Ornith-1.0-9B` より2〜3倍遅く、正確さは同等という結果でした。この記事では同じモデルを、[study2](https://zenn.dev/)（Aiderでの自律バグ修正）・[study3](https://zenn.dev/)（カルマンフィルタ/SVDの3段階タスク）・[study4](https://zenn.dev/)（自作ドライバmonocoder）の手法でさらに深掘りします。
+[study1-c](https://zenn.dev/tkpurine/articles/local-llm-study-001c-ornith-1-5) で、新しく公開された `Ornith-1.5-9B` を単発Q&Aタスクで検証したところ、`Ornith-1.0-9B` より2〜3倍遅く、正確さは同等という結果でした。この記事では同じモデルを、[study2](https://zenn.dev/tkpurine/articles/local-llm-study-002-aider-model-screening)（Aiderでの自律バグ修正）・[study3](https://zenn.dev/tkpurine/articles/local-llm-study-003-gemma-vs-ornith)（カルマンフィルタ/SVDの3段階タスク）・[study4](https://zenn.dev/tkpurine/articles/local-llm-study-004-custom-driver)（自作ドライバmonocoder）の手法でさらに深掘りします。
 
 結論を先に言うと、**Ornith-1.5-9Bは「よく考えるが、その考える時間がAiderという道具と相性が悪い」モデル**でした。単純作業は問題なくこなせる一方、自律修正ループを伴う複雑なタスクではAider経由で2.5時間かけても一度も完走できず、monocoder（`think`パラメータを制御できる自作ドライバ）に切り替えて初めてまともに検証できました。
 

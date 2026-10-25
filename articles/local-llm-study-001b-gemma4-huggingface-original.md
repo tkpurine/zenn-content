@@ -8,7 +8,7 @@ published: true
 
 ## この記事について
 
-[study1](https://zenn.dev/) では `gemma4:e2b`・`gemma4:e4b`（Ollama通常版）を、[study1-a](https://zenn.dev/) ではMLX版を検証しました。その過程で、2026年7月15日にGoogleがHugging Face上でGemma 4ファミリーの改善（FA4アテンション、チャットテンプレート修正など）を発表したにもかかわらず、**Ollama配布版にはまだ反映されていない**ことが分かりました。
+[study1](https://zenn.dev/tkpurine/articles/local-llm-study-001-macbook-air-10models) では `gemma4:e2b`・`gemma4:e4b`（Ollama通常版）を、[study1-a](https://zenn.dev/tkpurine/articles/local-llm-study-001a-gemma4-mlx) ではMLX版を検証しました。その過程で、2026年7月15日にGoogleがHugging Face上でGemma 4ファミリーの改善（FA4アテンション、チャットテンプレート修正など）を発表したにもかかわらず、**Ollama配布版にはまだ反映されていない**ことが分かりました。
 
 では「本家」であるHugging Face上のオリジナル重みを直接動かすとどうなるのか？ Ollamaを経由せず`transformers`ライブラリで直接ロードして、study1と同じ4タスクで検証しました。番外編その2、「study1-b」の位置づけです。
 

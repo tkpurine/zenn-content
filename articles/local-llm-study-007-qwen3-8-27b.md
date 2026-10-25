@@ -64,7 +64,7 @@ study1と同じ4タスクを、`think: false`を指定してOllama APIに直接�
 
 ## 追試：資料作成・要約用途での検証
 
-[study6](https://zenn.dev/) で `gemma4:e4b` と `qwen3.5:9b` に対して行った要約タスク（自作の技術記事、約8,400文字を「3〜5個の箇条書きで要約して」と指示）を、同じ条件でQwen3.8-27Bにも実行しました。
+[study6](https://zenn.dev/tkpurine/articles/local-llm-study-006-summarization-check) で `gemma4:e4b` と `qwen3.5:9b` に対して行った要約タスク（自作の技術記事、約8,400文字を「3〜5個の箇条書きで要約して」と指示）を、同じ条件でQwen3.8-27Bにも実行しました。
 
 なお、この要約プロンプトはOllamaのデフォルトコンテキスト長（4096トークン）を超えたため、当初`context size exceeds`エラーで失敗しました。`num_ctx: 16384`を明示して再実行しています（27Bクラスのモデルを長文タスクに使う場合は、このデフォルト値の小ささに注意が必要です）。
 

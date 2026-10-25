@@ -12,7 +12,7 @@ published: false
 
 ## 検証方法
 
-実際に自分で書いた技術記事（[study2](https://zenn.dev/)、約8,400文字）を渡し、「3〜5個の箇条書きで日本語要約してください」と指示しました。バックグラウンド負荷のない状態でOllama APIに直接投げています。
+実際に自分で書いた技術記事（[study2](https://zenn.dev/tkpurine/articles/local-llm-study-002-aider-model-screening)、約8,400文字）を渡し、「3〜5個の箇条書きで日本語要約してください」と指示しました。バックグラウンド負荷のない状態でOllama APIに直接投げています。
 
 ## 結果
 

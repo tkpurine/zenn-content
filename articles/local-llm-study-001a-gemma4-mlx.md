@@ -8,7 +8,7 @@ published: true
 
 ## この記事について
 
-[study1](https://zenn.dev/) では `gemma4:e2b`・`gemma4:e4b` を含む11モデルを比較しました。今回、Googleから同モデルの **MLX版**（`gemma4:e2b-mlx`・`gemma4:e4b-mlx`）が公開されていることが分かったため、study1と同じ4タスクで実測し、通常版とどれだけ差が出るかを検証しました。番外編として「study1-a」の位置づけです。
+[study1](https://zenn.dev/tkpurine/articles/local-llm-study-001-macbook-air-10models) では `gemma4:e2b`・`gemma4:e4b` を含む11モデルを比較しました。今回、Googleから同モデルの **MLX版**（`gemma4:e2b-mlx`・`gemma4:e4b-mlx`）が公開されていることが分かったため、study1と同じ4タスクで実測し、通常版とどれだけ差が出るかを検証しました。番外編として「study1-a」の位置づけです。
 
 > **確認の経緯：** 2026年7月15日にGoogleがGemma 4ファミリーの改善（FA4アテンション、チャットテンプレート修正など）をHugging Face上で発表しましたが、実際に`ollama pull gemma4:e2b`でモデルIDを比較したところ**通常版のダイジェストは完全一致**しており、Ollama配布版には未反映でした。一方、MLX版（Apple Silicon向け最適化ビルド）は量子化方式（nvfp4）もサイズも通常版と異なる別物で、実際に新規取得できることを確認しています。
 

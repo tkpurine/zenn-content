@@ -8,7 +8,7 @@ published: false
 
 ## この記事について
 
-[Ternary Bonsai 2 27B](https://pc.watch.impress.co.jp/docs/news/2142052.html) は、[study7](https://zenn.dev/)・[study8](https://zenn.dev/) で検証した `Qwen3.8-27B` をベースに、三値（ternary）量子化で**元の1/9のサイズ（5.9GB）に圧縮しつつ精度98.2%を維持**したと謳うモデルです。
+[Ternary Bonsai 2 27B](https://pc.watch.impress.co.jp/docs/news/2142052.html) は、[study7](https://zenn.dev/tkpurine/articles/local-llm-study-007-qwen3-8-27b)・[study8](https://zenn.dev/tkpurine/articles/local-llm-study-008-qwen3-8-27b-deep-dive) で検証した `Qwen3.8-27B` をベースに、三値（ternary）量子化で**元の1/9のサイズ（5.9GB）に圧縮しつつ精度98.2%を維持**したと謳うモデルです。
 
 この記事の主眼は速度ではなく**精度劣化の度合い**です。study7で使った `Qwen3.8-27B`（`UD-Q2_K_XL`）は、9.83GBというファイルサイズから逆算すると約**2.9bit/weight**の事後量子化（PTQ）です。一方Bonsai 2は**1.75bit/weightと、より低いビット予算**で劣化を抑えることを狙っています。
 

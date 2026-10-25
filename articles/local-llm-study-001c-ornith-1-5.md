@@ -8,7 +8,7 @@ published: false
 
 ## この記事について
 
-DeepReinforce AIから、Ornith-1.0の後継となる **Ornith-1.5** が公開されました。9B（Dense）・35B-A3B（MoE）・397B（MoE）の3サイズ構成で、9BモデルにはVision（マルチモーダル）対応も新たに加わっています。今回はこれまでの検証と同じ規模感である9Bモデル（`Ornith-1.5-9B`）を対象に、[study1](https://zenn.dev/) と同じ4タスクで `Ornith-1.0-9B` と直接比較しました。
+DeepReinforce AIから、Ornith-1.0の後継となる **Ornith-1.5** が公開されました。9B（Dense）・35B-A3B（MoE）・397B（MoE）の3サイズ構成で、9BモデルにはVision（マルチモーダル）対応も新たに加わっています。今回はこれまでの検証と同じ規模感である9Bモデル（`Ornith-1.5-9B`）を対象に、[study1](https://zenn.dev/tkpurine/articles/local-llm-study-001-macbook-air-10models) と同じ4タスクで `Ornith-1.0-9B` と直接比較しました。
 
 > **確認の経緯:** 検索結果の一部に不自然な点（記事公開日が検証時点より未来として書かれている等）があったため、Ollama公式ライブラリおよびHugging Face APIで一次情報を確認しました。Ornith-1.0の既知の事実（公開時期など）と正確に一致する実データが得られたため、実在するリリースと判断しています。なお本記事執筆時点でOllama公式`ornith`ライブラリには未掲載のため、`ollama pull hf.co/ornith-ai/Ornith-1.5-9B-GGUF` で取得しています。
 
