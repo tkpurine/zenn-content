@@ -3,7 +3,7 @@ title: "ローカルLLM study4: 自作ドライバでAiderのパーサー崩壊�
 emoji: "🛠️"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: false
+published: true
 ---
 
 ## この記事について
