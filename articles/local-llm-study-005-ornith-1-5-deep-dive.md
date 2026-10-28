@@ -3,7 +3,7 @@ title: "ローカルLLM study5: Ornith-1.5-9Bをstudy2〜4の手法で深掘り�
 emoji: "🐦"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: false
+published: true
 ---
 
 ## この記事について
