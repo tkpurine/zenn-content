@@ -4,7 +4,6 @@
 # - 対応するファイルが無い行は飛ばして次を公開する(行は残る)。
 
 # ローカルLLM系列
-local-llm-study-006-summarization-check
 local-llm-study-007-qwen3-8-27b
 local-llm-study-008-qwen3-8-27b-deep-dive
 local-llm-study-009-bonsai2-ternary-custom-build

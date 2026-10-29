@@ -3,7 +3,7 @@ title: "ローカルLLM study6: 資料作成・要約用途でgemma4:e4b/qwen3.5
 emoji: "📝"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python"]
-published: false
+published: true
 ---
 
 ## この記事について
