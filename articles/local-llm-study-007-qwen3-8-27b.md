@@ -3,7 +3,7 @@ title: "ローカルLLM study7: Qwen3.8-27B（Dynamic v3.0量子化）を試す"
 emoji: "🗜️"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: false
+published: true
 ---
 
 ## この記事について
