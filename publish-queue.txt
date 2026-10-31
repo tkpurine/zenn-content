@@ -8,6 +8,7 @@ local-llm-study-009-bonsai2-ternary-custom-build
 local-llm-study-010-ternary-bonsai-2-small
 local-llm-study-011-lfm2-5-24b-a2b-gguf-ud-q2-k-xl
 local-llm-study-012-qwen-code
+local-llm-study-013-qwen-code-wall-time
 
 # e2e AD系列(自動公開しない。公開したい記事は、スラッグの行頭の # を外す)
 # e2e-ad-study-001-roadmap
