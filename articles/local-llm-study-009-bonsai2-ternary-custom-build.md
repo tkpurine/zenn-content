@@ -6,6 +6,10 @@ topics: ["llm", "ollama", "ai", "python", "llamacpp"]
 published: false
 ---
 
+> **結論**: 27Bの単発の回答では、三値量子化のBonsai 2(1.77bit/weight)は通常量子化のQwen3.8-27B(2.88bit/weight)に目立つ差を出さず、速度は約2.3〜2.8倍だった。ただし自律的な複数ステップ(monocoder)では三値が1/4、通常が3/4で、通常量子化に及ばない兆候があった。単発の差は各1回なので結論にしていない。
+>
+> **読者が得るもの**: Ollamaで動かせない三値量子化モデルを専用llama.cppでビルドして動かす手順と、同じ条件で通常量子化と並べたときに何が変わり、何が変わらなかったかの実測。
+
 ## この記事について
 
 [Ternary Bonsai 2 27B](https://pc.watch.impress.co.jp/docs/news/2142052.html) は、[study7](https://zenn.dev/tkpurine/articles/local-llm-study-007-qwen3-8-27b)・[study8](https://zenn.dev/tkpurine/articles/local-llm-study-008-qwen3-8-27b-deep-dive) で検証した `Qwen3.8-27B` をベースに、三値（ternary）量子化で**元の1/9のサイズ（5.9GB）に圧縮しつつ精度98.2%を維持**したと謳うモデルです。

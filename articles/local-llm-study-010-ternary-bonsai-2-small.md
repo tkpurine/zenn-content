@@ -6,6 +6,10 @@ topics: ["llm", "ollama", "ai", "python", "llamacpp"]
 published: false
 ---
 
+> **結論**: 三値量子化Bonsai 2の小型版(2B/4B/9B)は、2Bと4Bで同サイズの通常量子化より崩れやすく、9B以上では差が小さかった。出力速度は27Bを含めて三値が約1.9〜2.8倍だった。
+>
+> **読者が得るもの**: 「サイズを下げると何が壊れるか、それは三値量子化のせいか」を、同条件の対照付きで見た結果。あわせて、自作の検証ツールで見つけた6つの不具合から、ローカルLLMの自動検証で測定を無効にしうる落とし穴。
+
 ## この記事について
 
 [study9](https://zenn.dev/tkpurine/articles/local-llm-study-009-bonsai2-ternary-custom-build) では、三値量子化の `Ternary Bonsai 2 27B`（PTQ1_0、約1.77bit/weight）を、約2.9bit/weightの通常の量子化（Qwen3.8-27B、UD-Q2_K_XL）と同じ4形式で比べました。同じMac mini・同じllama-server・同じ `-c 32768` で測ると、27Bの単発の回答には目立つ差が出ませんでした（詳しくはstudy9）。今回は、同じ量子化方式の小型版（2B / 4B / 9B、いずれもQwen3.5ベース、Apache-2.0）が公開されたので、同じPTQ1_0の梱包で測りました。

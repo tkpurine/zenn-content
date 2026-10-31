@@ -2,7 +2,7 @@ name: publish-next
 
 on:
   schedule:
-    - cron: "0 22 * * *" # 毎朝7:00 JST
+    - cron: "0 22 * * 0,2,4" # 月・水・金の7:00 JST（UTCの日・火・木 22:00）
   workflow_dispatch:
 
 permissions:

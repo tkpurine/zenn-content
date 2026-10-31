@@ -6,6 +6,10 @@ topics: ["llm", "ollama", "ai", "python", "llamacpp"]
 published: false
 ---
 
+> **結論**: LFM2.5-24B-A2B(2.68bit)は、単発系で27B級の2モデルと目立つ差がなく、monocoderではQwen3.8-27Bと同じ結果だった。ただし思考を止められず、応答の上限も違うため、優劣は断定しない。
+>
+> **読者が得るもの**: 思考を止められないモデルを他のモデルと同じ土俵で測るときに、測定が無効になる条件(応答上限の不足など)と、その見つけ方。
+
 ## この記事について
 
 Liquid AIの `LFM2.5-24B-A2B`（総パラメータ24B、1トークンあたりの有効パラメータは約2.45Bと公式カードにあるMoE）を、unslothの `UD-Q2_K_XL`（約2.68bit/weight、8.04GB）で、これまでのstudyと同じ固定タスクで測りました。16GBのMacに載せるため、2-bit前後の量子化を選んでいます。study9・study10で測った27B級の2モデル（Bonsai 2 27B、Qwen3.8-27B）と、同じMac mini・同じllama-server・同じ `-c 32768` で並べます。実測したのは study1, study2, study4, study6 の各形式です。
