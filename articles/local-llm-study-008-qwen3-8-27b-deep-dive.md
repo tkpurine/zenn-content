@@ -3,7 +3,7 @@ title: "ローカルLLM study8: Qwen3.8-27Bをstudy2〜4の手法で深掘りす
 emoji: "🗜️"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "coding"]
-published: false
+published: true
 ---
 
 ## この記事について
