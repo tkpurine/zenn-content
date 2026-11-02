@@ -3,7 +3,7 @@ title: "ローカルLLM study9: 三値量子化Bonsai 2 27Bを、同条件のQwe
 emoji: "🔨"
 type: "tech"
 topics: ["llm", "ollama", "ai", "python", "llamacpp"]
-published: false
+published: true
 ---
 
 > **結論**: 27Bの単発の回答では、三値量子化のBonsai 2(1.77bit/weight)は通常量子化のQwen3.8-27B(2.88bit/weight)に目立つ差を出さず、速度は約2.3〜2.8倍だった。ただし自律的な複数ステップ(monocoder)では三値が1/4、通常が3/4で、通常量子化に及ばない兆候があった。単発の差は各1回なので結論にしていない。
