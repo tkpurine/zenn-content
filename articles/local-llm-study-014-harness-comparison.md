@@ -1,5 +1,5 @@
 ---
-title: "ローカルLLM study14: 同じ9Bモデルでハーネスだけ替えると、Codex・Claude Code・Copilot CLIで何が変わるか"
+title: "ローカルLLM study14: 同じ9Bモデルでハーネスだけ替えて、Codex・Claude Code・Copilot CLIを比べる"
 emoji: "🔧"
 type: "tech"
 topics: ["llm", "llamacpp", "codex", "claudecode", "githubcopilot"]
