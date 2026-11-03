@@ -1,8 +1,8 @@
 name: publish-next
 
 on:
-  schedule:
-    - cron: "0 22 * * 0,2,4" # 月・水・金の7:00 JST（UTCの日・火・木 22:00）
+  # 自動公開は停止中（2026-11-04）。published: true は手で設定し、反映はローカルの毎日ジョブ(sync-published.sh)が行う。
+  # 再開するなら schedule: - cron: "0 22 * * 0,2,4"（月水金 7:00 JST）を戻す。手動実行は workflow_dispatch から。
   workflow_dispatch:
 
 permissions:
